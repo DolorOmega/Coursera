@@ -1,0 +1,10 @@
+Many_Links_Site:
+http://www.dukelearntoprogram.com/course2/data/manylinks.html
+
+
+GRch38dnapart.fa:
+http://www.dukelearntoprogram.com/course2/data/dna/GRch38dnapart.fa
+
+
+newyorktimes:
+http://www.dukelearntoprogram.com/course2/data/newyorktimes.html
