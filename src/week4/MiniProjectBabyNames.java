@@ -10,7 +10,7 @@ public class MiniProjectBabyNames {
 
 	public static void main (String [] args) {
 		MiniProjectBabyNames miniProj = new MiniProjectBabyNames();
-		miniProj.runSuite(5);
+		miniProj.runSuite(6);
 		//miniProj.testSuite();
 	}
 
@@ -28,13 +28,13 @@ public class MiniProjectBabyNames {
 					break;
 			case 4: whatIsNameInYear("Owen", 1974, 2014, "m");
 					break;
-			case 5: int highRankResult = yearOfHighestRank("Mason", "m");
+			case 5: int highRankResult = yearOfHighestRank("Mich", "m");
 					System.out.println(highRankResult);
 					break;
-			case 6: double avgResult = getAverageRank("Robert", "m");
+			case 6: double avgResult = getAverageRank("Susan", "f");
 					System.out.println(avgResult);
 					break;
-			case 7: int higherBirthresult = getTotalBirthsRankedHigher(2012, "William", "m");
+			case 7: int higherBirthresult = getTotalBirthsRankedHigher(1990, "Drew", "m");
 					System.out.println(higherBirthresult);
 					break;
 		}
@@ -123,11 +123,7 @@ public class MiniProjectBabyNames {
         }
         
         while (foundName == true){
-	        if(gender.equalsIgnoreCase("M")){
-	            return resultName;
-	        }else if(gender.equalsIgnoreCase("F")){
-	            return resultName;
-	        }
+        	return resultName;
         }
         return "NO NAME";
 	}
@@ -172,7 +168,7 @@ public class MiniProjectBabyNames {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////	
 	public double getAverageRank(String name, String gender){         
 		double averageRank = -1.0;
-		int totalRank = 0;
+		double totalRank = 0;
 		int fileCount = 0;
 		String filename = "";
 		DirectoryResource dr = new DirectoryResource();
@@ -198,7 +194,7 @@ public class MiniProjectBabyNames {
 	public int getTotalBirthsRankedHigher(int year, String name, String gender){
 		int totalHigherBirths = 0;
 		int currentRec = 0;
-		FileResource fr = new FileResource("week4/data/yob" + year + "short.csv");
+		FileResource fr = new FileResource("week4/data/yob" + year + ".csv");
 		int rank = getRank(year, name, gender);
 		
 		for (CSVRecord rec : fr.getCSVParser(false)) {
