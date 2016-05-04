@@ -11,6 +11,7 @@ public class MiniProjectBabyNames {
 	public static void main (String [] args) {
 		MiniProjectBabyNames miniProj = new MiniProjectBabyNames();
 		miniProj.runSuite(6);
+		//miniProj.testSuite();
 		
 		//initialize variables as static final to be reused throughout the code for easier readablilty
 		//parse the data once into objects within the code instead of having re-read it every time
@@ -209,5 +210,83 @@ public class MiniProjectBabyNames {
 		}
 		return totalHigherBirths;
 	}
+	
+	//Utility functions to run preset tests for each method/////////////////////////////////////////////////
+	//TODO: add assertions to complete test cases
+		public void testSuite(){
+			testTotalBirths();
+			System.out.println("---------------------------------\n");
+			testGetRank();
+			System.out.println("---------------------------------\n");
+			testGetName();
+			System.out.println("---------------------------------\n");
+			testWhatIsNameInYear();
+			System.out.println("---------------------------------\n");
+			testYearOfHighestRank();
+			System.out.println("---------------------------------\n");
+			testGetAverageRank();
+			System.out.println("---------------------------------\n");
+			testGetTotalBirthsRankedHigher();
+		}
+		
+		public void testTotalBirths(){
+			String fileString = "week4/data/yob1905.csv";
+			
+			FileResource fr = new FileResource(fileString);
+			totalBirths(fr);
+		}
+		
+		public void testGetRank(){
+			int year = 2012;
+			String name = "Mason";
+			String gender = "m";
+					
+			int rankResult = getRank(year, name, gender);
+			System.out.println(rankResult);
+		}
+		
+		public void testGetName(){
+			int year = 2012;
+			int rank = 2;
+			String gender = "m";
+			
+			String nameResult = getName(year, rank, gender);
+			System.out.println(nameResult);
+		}
+		
+		public void testWhatIsNameInYear(){
+			String name = "Mason";
+			int birthYear = 2014;
+			int compareYear = 2012;
+			String gender = "m";
+			
+			whatIsNameInYear(name, birthYear, compareYear, gender);
+		}
+		
+		public void testYearOfHighestRank(){
+			String name = "Ethan";
+			String gender = "m";
+			
+			int highRankResult = yearOfHighestRank(name, gender);
+			System.out.println(highRankResult);
+		}
+		
+		public void testGetAverageRank(){
+			String name = "Mason";
+			String gender = "m";
+			
+			double avgResult = getAverageRank(name, gender);
+			System.out.println(avgResult);
+		}
+		
+		public void testGetTotalBirthsRankedHigher(){
+			int year = 2012;
+			String name = "William";
+			String gender = "m";
+			
+			int higherBirthresult = getTotalBirthsRankedHigher(year, name, gender);
+			System.out.println(higherBirthresult);
+		}
+
 
 }
