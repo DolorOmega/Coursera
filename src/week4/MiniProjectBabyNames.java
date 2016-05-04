@@ -32,7 +32,7 @@ public class MiniProjectBabyNames {
 			case 6: double avgResult = getAverageRank("Robert", "m");
 					System.out.println(avgResult);
 					break;
-			case 7: int higherBirthresult = getTotalBirthsRankedHigher(2014, "Ava", "f");
+			case 7: int higherBirthresult = getTotalBirthsRankedHigher(2012, "William", "m");
 					System.out.println(higherBirthresult);
 					break;
 		}
@@ -168,35 +168,35 @@ public class MiniProjectBabyNames {
 	
 	public static double getAverageRank(String name, String gender){         
 		double averageRank = -1.0;
-		int temp=0;
-		int count = 1;
+		int totalRank=0;
+		int fileCount = 0;
 		String filename="";
 		DirectoryResource dr = new DirectoryResource();
 		 
 		for (File f : dr.selectedFiles()) {
 		    filename = f.getPath().substring(f.getPath().indexOf("yob")+3,f.getPath().indexOf("yob")+7);
 			 int currentRank = getRank(Integer.parseInt(filename),name,gender);
-		         if(currentRank != -1 ){
-		            temp += currentRank; 
-		            averageRank=(double)temp/count;
-		            count++;
+		         if(currentRank != -1){
+		        	 totalRank += currentRank; 
+		            averageRank=totalRank/fileCount;
+		            fileCount++;
 		         }
 		     }
 		     
 		   return averageRank;
-    
 	}
 	
 	
 	public static int getTotalBirthsRankedHigher(int year, String name, String gender){
 		int totalHigherBirths = 0;
-		String resultName = "";
+		int currentRec = 0;
 		FileResource fr = new FileResource("week4/data/yob" + year + "short.csv");
 		int rank = getRank(year, name, gender);
-		for (int i = (rank-1); i > 0; i--){
-			resultName = getName(year, i, gender);
-			for (CSVRecord rec : fr.getCSVParser(false)) {
-				if(rec.get(0).equals(resultName)){
+		
+		for (CSVRecord rec : fr.getCSVParser(false)) {
+			if (rec.get(1).equalsIgnoreCase(gender)){
+				currentRec++;
+				if(currentRec < rank && rec.get(1).equalsIgnoreCase(gender)){
 					totalHigherBirths += Integer.parseInt(rec.get(2));
 				}
 			}
