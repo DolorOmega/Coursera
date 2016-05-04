@@ -2,6 +2,8 @@ package week4;
 
 import org.apache.commons.csv.CSVRecord;
 import edu.duke.*;
+
+import java.io.File;
 import java.util.*;
 
 
@@ -98,7 +100,56 @@ public class MiniProjectBabyNames {
 	}
 	
 	public static void whatIsNameInYear (String name, int year, int newYear, String gender){
+		int resultRank = getRank(year, name, gender);
+		String resultName = getName(newYear, resultRank, gender);
+		String genderNoun = "";
 		
+		if(gender.equalsIgnoreCase("M")){
+            genderNoun = "he";
+        }else if(gender.equalsIgnoreCase("F")){
+            genderNoun = "she";
+        }
+		
+		System.out.println(name + " born in " + year + " would be " + resultName + " if " + genderNoun + " was born in " + newYear);
+	}
+	
+	public static int yearOfHighestRank (String name, String gender){
+		DirectoryResource dr = new DirectoryResource();
+		String fileName = "";
+		String yearToInt = "";
+		int year = 0;
+		int topRankYear = 0;
+		int topRank = 0;
+		int currentRank = 0;
+		// iterate over files
+		for (File f : dr.selectedFiles()) {
+			FileResource fr = new FileResource(f);
+			fileName = f.getName();
+			yearToInt = fileName.substring(3, 7);
+			year = Integer.parseInt(yearToInt);
+			//If topRankYear is nothing
+			if (topRankYear == 0) {
+				topRankYear = year;
+			}
+			//Otherwise
+			else {
+				currentRank = getRank(year, name, gender);
+				topRank = getRank(topRankYear, name, gender);
+				//Check if currentRow's temperature > largestSoFar's
+				if (currentRank < topRank) {
+					//If so update largestSoFar to currentRow
+					topRankYear = year;
+				}
+			}
+		}
+		
+		if (topRankYear != -1){
+			return topRankYear;
+		}
+		else{
+			return -1;
+		}
+	
 	}
 	
 	public static void main (String [] args) {
@@ -106,7 +157,10 @@ public class MiniProjectBabyNames {
 		//FileResource fr = new FileResource("/C:/Users/Jeremy Foster/Eclipse/workspace/Coursera/src/week4/data/yob2014short.csv");
 		//totalBirths(fr);
 		//int result = getRank(2014, "Mason", "m");
-		String result = getName(2014, 3, "m");
+		//String result = getName(2014, 3, "m");
+		//System.out.println(result);
+		//whatIsNameInYear("Mason", 2014, 2012, "m");
+		int result = yearOfHighestRank("Mason", "m");
 		System.out.println(result);
 	}
 	
