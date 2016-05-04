@@ -9,6 +9,35 @@ import java.util.*;
 
 public class MiniProjectBabyNames {
 
+	public static void main (String [] args) {
+		runSuite(7);
+	}
+	
+	public static void runSuite(int testToRun){
+		switch(testToRun){
+			case 1: FileResource fr = new FileResource("week4/data/yob1905.csv");
+					totalBirths(fr);
+					break;
+			case 2: int rankResult = getRank(1971, "Frank", "m");
+					System.out.println(rankResult);
+					break;
+			case 3: String nameResult = getName(1982, 450, "m");
+					System.out.println(nameResult);
+					break;
+			case 4: whatIsNameInYear("Owen", 1974, 2014, "m");
+					break;
+			case 5: int highRankResult = yearOfHighestRank("Mich", "m");
+					System.out.println(highRankResult);
+					break;
+			case 6: double avgResult = getAverageRank("Robert", "m");
+					System.out.println(avgResult);
+					break;
+			case 7: int higherBirthresult = getTotalBirthsRankedHigher(2014, "Ava", "f");
+					System.out.println(higherBirthresult);
+					break;
+		}
+	}
+	
 	public static void totalBirths (FileResource fr) {
 		int totalBirths = 0;
 		int totalBoys = 0;
@@ -174,21 +203,5 @@ public class MiniProjectBabyNames {
 		}
 		return totalHigherBirths;
 	}
-	
-	public static void main (String [] args) {
-		//FileResource fr = new FileResource();
-		//FileResource fr = new FileResource("week4/data/yob1905.csv");
-		//totalBirths(fr);
-		//int result = getRank(1971, "Frank", "m");
-		//String result = getName(1982, 450, "m");
-		//System.out.println(result);
-		//whatIsNameInYear("Owen", 1974, 2014, "m");
-		//int result = yearOfHighestRank("Mich", "m");
-		//System.out.println(result);
-		//double result = getAverageRank("Robert", "m");
-		//System.out.println(result);
-		int result = getTotalBirthsRankedHigher(2014, "Ava", "f");
-		System.out.println(result);
-	}
-	
+
 }
