@@ -68,7 +68,7 @@ public class MiniProjectBabyNames {
 		System.out.println("total unique girl names = " + uniqueGirlNames.size());
 	}
 	
-	
+///////////////////////////////////////////////////////////////////////////////////////////////////////		
 	public int getRank(int year, String name, String gender) {
 		int maleRank = 0;
         int femaleRank = 0;
@@ -99,7 +99,7 @@ public class MiniProjectBabyNames {
         return -1;
 	}
 	
-	
+///////////////////////////////////////////////////////////////////////////////////////////////////////	
 	public String getName (int year, int rank, String gender){
 		int maleRank = 0;
         int femaleRank = 0;
@@ -132,6 +132,7 @@ public class MiniProjectBabyNames {
         return "NO NAME";
 	}
 	
+///////////////////////////////////////////////////////////////////////////////////////////////////////	
 	public void whatIsNameInYear (String name, int year, int newYear, String gender){
 		int resultRank = getRank(year, name, gender);
 		String resultName = getName(newYear, resultRank, gender);
@@ -146,7 +147,7 @@ public class MiniProjectBabyNames {
 		System.out.println(name + " born in " + year + " would be " + resultName + " if " + genderNoun + " was born in " + newYear);
 	}
 		
-	
+///////////////////////////////////////////////////////////////////////////////////////////////////////	
 	public int yearOfHighestRank (String name, String gender){
 	    int yearOfHighestRank = -1;
 	    int compare = 0;
@@ -168,6 +169,7 @@ public class MiniProjectBabyNames {
 	    return yearOfHighestRank;
 	}
 	
+///////////////////////////////////////////////////////////////////////////////////////////////////////	
 	public double getAverageRank(String name, String gender){         
 		double averageRank = -1.0;
 		int totalRank = 0;
@@ -192,7 +194,7 @@ public class MiniProjectBabyNames {
 		}
 	}
 	
-	
+///////////////////////////////////////////////////////////////////////////////////////////////////////	
 	public int getTotalBirthsRankedHigher(int year, String name, String gender){
 		int totalHigherBirths = 0;
 		int currentRec = 0;
