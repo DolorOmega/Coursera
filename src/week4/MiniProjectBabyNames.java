@@ -11,7 +11,9 @@ public class MiniProjectBabyNames {
 	public static void main (String [] args) {
 		MiniProjectBabyNames miniProj = new MiniProjectBabyNames();
 		miniProj.runSuite(6);
-		//miniProj.testSuite();
+		
+		//initialize variables as static final to be reused throughout the code for easier readablilty
+		//parse the data once into objects within the code instead of having re-read it every time
 	}
 
 //Utility method to run various methods quickly for the quiz/////////////////////////////////////////
@@ -31,7 +33,7 @@ public class MiniProjectBabyNames {
 			case 5: int highRankResult = yearOfHighestRank("Mich", "m");
 					System.out.println(highRankResult);
 					break;
-			case 6: double avgResult = getAverageRank("Susan", "f");
+			case 6: double avgResult = getAverageRank("Jacob", "m");
 					System.out.println(avgResult);
 					break;
 			case 7: int higherBirthresult = getTotalBirthsRankedHigher(1990, "Drew", "m");
@@ -45,8 +47,8 @@ public class MiniProjectBabyNames {
 		int totalBoys = 0;
 		int totalGirls = 0;
 		int totalNames = 0;
-		HashSet uniqueBoyNames = new HashSet();
-		HashSet uniqueGirlNames = new HashSet();
+		Set<String> uniqueBoyNames = new HashSet<String>();
+		Set<String> uniqueGirlNames = new HashSet<String>();
 		for (CSVRecord rec : fr.getCSVParser(false)) {
 			totalNames += 1;
 			int numBorn = Integer.parseInt(rec.get(2));
@@ -122,6 +124,7 @@ public class MiniProjectBabyNames {
             }
         }
         
+        //init resultName with the default value and only return the resultName instead of the nearly infinite while loop
         while (foundName == true){
         	return resultName;
         }
@@ -169,21 +172,20 @@ public class MiniProjectBabyNames {
 	public double getAverageRank(String name, String gender){         
 		double averageRank = -1.0;
 		double totalRank = 0;
-		int fileCount = 0;
-		String filename = "";
+		int counter = 0;
+		String year = "";
 		DirectoryResource dr = new DirectoryResource();
 		 
 		for (File f : dr.selectedFiles()) {
-		    filename = f.getPath().substring(f.getPath().indexOf("yob")+3,f.getPath().indexOf("yob")+7);
-			 int currentRank = getRank(Integer.parseInt(filename),name,gender);
+		    year = f.getName().substring(3, 7);
+			 int currentRank = getRank(Integer.parseInt(year),name,gender);
+			 counter++;
 		         if(currentRank != -1){
 		        	totalRank += currentRank; 
-		            //averageRank=totalRank/fileCount;
-		            fileCount++;
 		         }
 		     }
 		if (totalRank != 0){
-			averageRank=totalRank/fileCount;
+			averageRank=totalRank/counter;
 			return averageRank;
 		}else{ 
 			return averageRank;
@@ -206,83 +208,6 @@ public class MiniProjectBabyNames {
 			}
 		}
 		return totalHigherBirths;
-	}
-
-//Utility functions to run preset tests for each method/////////////////////////////////////////////////
-//TODO: add assertions to complete test cases
-	public void testSuite(){
-		testTotalBirths();
-		System.out.println("---------------------------------\n");
-		testGetRank();
-		System.out.println("---------------------------------\n");
-		testGetName();
-		System.out.println("---------------------------------\n");
-		testWhatIsNameInYear();
-		System.out.println("---------------------------------\n");
-		testYearOfHighestRank();
-		System.out.println("---------------------------------\n");
-		testGetAverageRank();
-		System.out.println("---------------------------------\n");
-		testGetTotalBirthsRankedHigher();
-	}
-	
-	public void testTotalBirths(){
-		String fileString = "week4/data/yob1905.csv";
-		
-		FileResource fr = new FileResource(fileString);
-		totalBirths(fr);
-	}
-	
-	public void testGetRank(){
-		int year = 2012;
-		String name = "Mason";
-		String gender = "m";
-				
-		int rankResult = getRank(year, name, gender);
-		System.out.println(rankResult);
-	}
-	
-	public void testGetName(){
-		int year = 2012;
-		int rank = 2;
-		String gender = "m";
-		
-		String nameResult = getName(year, rank, gender);
-		System.out.println(nameResult);
-	}
-	
-	public void testWhatIsNameInYear(){
-		String name = "Mason";
-		int birthYear = 2014;
-		int compareYear = 2012;
-		String gender = "m";
-		
-		whatIsNameInYear(name, birthYear, compareYear, gender);
-	}
-	
-	public void testYearOfHighestRank(){
-		String name = "Ethan";
-		String gender = "m";
-		
-		int highRankResult = yearOfHighestRank(name, gender);
-		System.out.println(highRankResult);
-	}
-	
-	public void testGetAverageRank(){
-		String name = "Mason";
-		String gender = "m";
-		
-		double avgResult = getAverageRank(name, gender);
-		System.out.println(avgResult);
-	}
-	
-	public void testGetTotalBirthsRankedHigher(){
-		int year = 2012;
-		String name = "William";
-		String gender = "m";
-		
-		int higherBirthresult = getTotalBirthsRankedHigher(year, name, gender);
-		System.out.println(higherBirthresult);
 	}
 
 }
