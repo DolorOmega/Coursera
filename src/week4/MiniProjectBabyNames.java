@@ -1,6 +1,6 @@
 package week4;
 
-import org.apache.commons.csv.CSVRecord;
+import org.apache.commons.csv.*;
 import edu.duke.*;
 
 import java.io.File;
@@ -43,7 +43,7 @@ public class MiniProjectBabyNames {
         int femaleRank = 0;
         Boolean foundName = false;
         
-        FileResource fr = new FileResource("week4/data/yob" + year + "short.csv");
+        FileResource fr = new FileResource("week4/data/yob" + year + ".csv");
         
         for(CSVRecord rec : fr.getCSVParser(false)){            
             if(rec.get(1).equalsIgnoreCase("F")){
@@ -74,7 +74,7 @@ public class MiniProjectBabyNames {
         String resultName = "";
         Boolean foundName = false;
         
-        FileResource fr = new FileResource("week4/data/yob" + year + "short.csv");
+        FileResource fr = new FileResource("week4/data/yob" + year + ".csv");
         
         for(CSVRecord rec : fr.getCSVParser(false)){            
             if(rec.get(1).equalsIgnoreCase("F")){
@@ -112,55 +112,82 @@ public class MiniProjectBabyNames {
 		
 		System.out.println(name + " born in " + year + " would be " + resultName + " if " + genderNoun + " was born in " + newYear);
 	}
+		
 	
 	public static int yearOfHighestRank (String name, String gender){
+	    int yearOfHighestRank=-1;
+	    int temp=0;
+	    String filename="";
+	    DirectoryResource dr = new DirectoryResource();
+        for (File f : dr.selectedFiles()) {
+            
+            filename = f.getPath().substring(f.getPath().indexOf("yob")+3,f.getPath().indexOf("yob")+7);
+            int currentRank = getRank(Integer.parseInt(filename),name,gender);
+            if(currentRank != -1 && temp == 0){
+                temp=currentRank;
+                yearOfHighestRank=Integer.parseInt(filename);
+                
+            }
+            if(currentRank<temp && currentRank != -1){
+                
+                temp = currentRank;
+                yearOfHighestRank = Integer.parseInt(filename);
+            }
+        }
+	    return yearOfHighestRank;
+	}
+	
+	public static double getAverageRank(String name, String gender){         
+		double averageRank = -1.0;
+		int temp=0;
+		int count = 1;
+		String filename="";
 		DirectoryResource dr = new DirectoryResource();
-		String fileName = "";
-		String yearToInt = "";
-		int year = 0;
-		int topRankYear = 0;
-		int topRank = 0;
-		int currentRank = 0;
-		// iterate over files
+		 
 		for (File f : dr.selectedFiles()) {
-			FileResource fr = new FileResource(f);
-			fileName = f.getName();
-			yearToInt = fileName.substring(3, 7);
-			year = Integer.parseInt(yearToInt);
-			//If topRankYear is nothing
-			if (topRankYear == 0) {
-				topRankYear = year;
-			}
-			//Otherwise
-			else {
-				currentRank = getRank(year, name, gender);
-				topRank = getRank(topRankYear, name, gender);
-				//Check if currentRow's temperature > largestSoFar's
-				if (currentRank < topRank) {
-					//If so update largestSoFar to currentRow
-					topRankYear = year;
+		    filename = f.getPath().substring(f.getPath().indexOf("yob")+3,f.getPath().indexOf("yob")+7);
+			 int currentRank = getRank(Integer.parseInt(filename),name,gender);
+		         if(currentRank != -1 ){
+		            temp += currentRank; 
+		            averageRank=(double)temp/count;
+		            count++;
+		         }
+		     }
+		     
+		   return averageRank;
+    
+	}
+	
+	
+	public static int getTotalBirthsRankedHigher(int year, String name, String gender){
+		int totalHigherBirths = 0;
+		String resultName = "";
+		FileResource fr = new FileResource("week4/data/yob" + year + "short.csv");
+		int rank = getRank(year, name, gender);
+		for (int i = (rank-1); i > 0; i--){
+			resultName = getName(year, i, gender);
+			for (CSVRecord rec : fr.getCSVParser(false)) {
+				if(rec.get(0).equals(resultName)){
+					totalHigherBirths += Integer.parseInt(rec.get(2));
 				}
 			}
 		}
-		
-		if (topRankYear != -1){
-			return topRankYear;
-		}
-		else{
-			return -1;
-		}
-	
+		return totalHigherBirths;
 	}
 	
 	public static void main (String [] args) {
 		//FileResource fr = new FileResource();
-		//FileResource fr = new FileResource("/C:/Users/Jeremy Foster/Eclipse/workspace/Coursera/src/week4/data/yob2014short.csv");
+		//FileResource fr = new FileResource("week4/data/yob1905.csv");
 		//totalBirths(fr);
-		//int result = getRank(2014, "Mason", "m");
-		//String result = getName(2014, 3, "m");
+		//int result = getRank(1971, "Frank", "m");
+		//String result = getName(1982, 450, "m");
 		//System.out.println(result);
-		//whatIsNameInYear("Mason", 2014, 2012, "m");
-		int result = yearOfHighestRank("Mason", "m");
+		//whatIsNameInYear("Owen", 1974, 2014, "m");
+		//int result = yearOfHighestRank("Mich", "m");
+		//System.out.println(result);
+		//double result = getAverageRank("Robert", "m");
+		//System.out.println(result);
+		int result = getTotalBirthsRankedHigher(2014, "Ava", "f");
 		System.out.println(result);
 	}
 	
