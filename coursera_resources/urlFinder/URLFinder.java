@@ -6,7 +6,7 @@
 import edu.duke.*;
 
 public class URLFinder {
-	public StorageResource findURLs(String url) {
+	public static StorageResource findURLs(String url) {
 		URLResource page = new URLResource(url);
 		String source = page.asString();
 		StorageResource store = new StorageResource();
@@ -27,13 +27,19 @@ public class URLFinder {
 		return store;
 	}
 
-	public void testURL() {
-		StorageResource s1 = findURLs("https://www.whitehouse.gov");
-		StorageResource s2 = findURLs("http://www.doctorswithoutborders.org");
+	public static void testURL() {
+		StorageResource s1 = findURLs("http://www.dukelearntoprogram.com/course2/data/newyorktimes.html");
+		//StorageResource s2 = findURLs("http://www.doctorswithoutborders.org");
 		for (String link : s2.data()) {
 			System.out.println(link);
 		}
 		System.out.println("size = " + s1.size());
 		System.out.println("size = " + s2.size());
+	}
+	
+	public static void main (String [] args){
+		//URLFinder runCode = new URLFinder();
+		//runCode.testURL();
+		testURL();
 	}
 }

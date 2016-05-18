@@ -8,7 +8,7 @@
 import edu.duke.*;
 import java.io.*;
 
-public class TagFinder {
+public class TagFinder2 {
 	public String findProtein(String dna) {
 		int start = dna.indexOf("atg");
 		if (start == -1) {
