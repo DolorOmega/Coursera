@@ -1,8 +1,5 @@
 package course3week1;
 
-import edu.duke.*;
-import java.lang.*;
-
 public class WordPlay {
 
 	public static void main(String[] args) {
@@ -53,7 +50,7 @@ public class WordPlay {
 		
 		for(int i = 0; i < phrase.length(); i++){
 			if (ch == emphasized.charAt(i)){
-				if (i == 0 || (i & 2) == 0){
+				if (i == 0 || (i & 1) == 0){
 					emphasized.setCharAt(i, '+');
 				}else {
 					emphasized.setCharAt(i, '*');

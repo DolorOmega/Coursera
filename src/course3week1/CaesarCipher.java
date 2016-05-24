@@ -20,7 +20,6 @@ public class CaesarCipher {
 
         for(int i = 0; i < encrypted.length(); i++) {
             char currChar = encrypted.charAt(i);
-            Boolean a = Character.isUpperCase(currChar);
             int idx = alphabet.indexOf(Character.toUpperCase(currChar));
             if(idx != -1){
                 char newChar = shiftedAlphabet.charAt(idx);
@@ -43,7 +42,6 @@ public class CaesarCipher {
 	}
 	
 	public String encryptTwoKeys (String input, int key1, int key2) {
-		Boolean altBool = true;
 		StringBuilder encrypted = new StringBuilder(input);
         String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         String shiftedAlphabet1 = alphabet.substring(key1) + alphabet.substring(0,key1);
@@ -51,17 +49,15 @@ public class CaesarCipher {
 
         for(int i = 0; i < encrypted.length(); i++) {
             char currChar = encrypted.charAt(i);
-            Boolean a = Character.isUpperCase(currChar);
             int idx = alphabet.indexOf(Character.toUpperCase(currChar));
             if(idx != -1){
-            	if (i == 0 || (i & 2) == 0){
+            	if (i == 0 || (i & 1) == 0){
 	                char newChar = shiftedAlphabet1.charAt(idx);
 	                if(Character.isUpperCase(currChar)){
 	                	encrypted.setCharAt(i, newChar);
 	                }else{
 	                	encrypted.setCharAt(i, Character.toLowerCase(newChar));
 	                }
-	                altBool = false;
             	}else{
             		char newChar = shiftedAlphabet2.charAt(idx);
 	                if(Character.isUpperCase(currChar)){
@@ -69,7 +65,6 @@ public class CaesarCipher {
 	                }else{
 	                	encrypted.setCharAt(i, Character.toLowerCase(newChar));
 	                }
-	                altBool = true;
             	}
             }
         }
