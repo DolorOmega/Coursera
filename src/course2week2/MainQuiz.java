@@ -1,9 +1,12 @@
 package course2week2;
 
+import edu.duke.FileResource;
+import edu.duke.StorageResource;
+
 public class MainQuiz {
 	public static void main (String [] args){
 		MainQuiz runThis = new MainQuiz();
-		runThis.
+		//runThis.findStopIndex(dna, index)
 	}
 
 	
@@ -111,7 +114,7 @@ public class MainQuiz {
 	 }
 	 
 	 
-	 +public int findCorG(String letter, String dna){
+	 public int findCorG(String letter, String dna){
 	     
 	     int start = 0;
 	     int numberOf =0;
