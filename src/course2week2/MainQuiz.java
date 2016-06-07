@@ -7,6 +7,8 @@ public class MainQuiz {
 	public static void main (String [] args){
 		MainQuiz runThis = new MainQuiz();
 		//runThis.findStopIndex(dna, index)
+		runThis.testStorageFinder();
+		
 	}
 
 	
@@ -79,7 +81,8 @@ public class MainQuiz {
 	 public void testStorageFinder() {
 	         
 	        
-	         FileResource fr = new FileResource("dna/brca1line.fa");
+	         //FileResource fr = new FileResource("/coursera_resources/dna/brca1line.fa");
+	         FileResource fr = new FileResource();
 	         
 	             
 	         String s = fr.asString();
