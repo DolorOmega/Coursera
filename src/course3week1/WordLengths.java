@@ -5,7 +5,6 @@ import edu.duke.FileResource;
 public class WordLengths {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		WordLengths wl = new WordLengths();
 		wl.testCountWordLengths();
 	}
@@ -14,21 +13,21 @@ public class WordLengths {
 		for (String word : resource.words()){
 			char firstChar = word.charAt(0);
 			char lastChar = word.charAt(word.length()-1);
-			System.out.println(lastChar);
+			//System.out.println(lastChar);
 			
 			if (!Character.isAlphabetic(firstChar)){
-				System.out.println("first char non alpha word: " + word);
+				//System.out.println("first char non alpha word: " + word);
 				word.substring(1, word.length());
 			}
 			if (!Character.isAlphabetic(lastChar)){
-				System.out.println("last char non alpha word: " + word);
+				//System.out.println("last char non alpha word: " + word);
 				word.substring(0, word.length()-1);
-				System.out.println("word after last char substring: " + word);
+				//System.out.println("word after last char substring: " + word);
 			}
 			
 			if (word.length() > 0){
 				counts[word.length()-1]++;
-				System.out.println("Word length incremented" + counts[word.length()]);
+				//System.out.println("Word length incremented" + counts[word.length()]);
 			}else{
 				counts[0]++;
 			}
